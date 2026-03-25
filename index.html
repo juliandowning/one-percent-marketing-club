@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1% Digital Marketing Club — DigitalXperience.ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   BRAND PALETTE  #8FC32E · #889CE7 · #0a0a0a
+   Fonts: Open Sans + DM Mono
+═══════════════════════════════════════════════ */
+:root {
+  --bg:      #0a0a0a;
+  --surface: #111111;
+  --card:    #181818;
+  --border:  #2c2c2c;
+  --brand1:  #8FC32E;
+  --brand2:  #889CE7;
+  --text:    #f0f0f0;
+  --muted:   #888888;
+  --red:     #FF4D6D;
+  --orange:  #FF9500;
+  --gold:    #FFD60A;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Open Sans',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+/* Subtle grid background */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(143,195,46,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(136,156,231,.02) 1px,transparent 1px);
+  background-size:44px 44px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── SCREENS ── */
+.screen{display:none!important;position:relative;z-index:1;}
+.screen.on{display:flex!important;flex-direction:column;}
+
+/* ── DX LOGO ── */
+.dx-logo{display:inline-flex;align-items:center;gap:9px;}
+.dx-logo-badge{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,var(--brand1),var(--brand2));
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.dx-logo-badge svg{width:20px;height:20px;}
+.dx-logo-text{font-weight:800;font-size:1.05rem;letter-spacing:-.4px;}
+.dx-logo-text span{color:var(--brand1);}
+.dx-logo-sub{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:600;color:var(--muted);letter-spacing:.5px;margin-top:1px;}
+.dx-logo-stack{display:flex;flex-direction:column;line-height:1.1;}
+
+/* ── HOME SCREEN ── */
+#s-home{
+  min-height:100vh;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:48px 24px 60px;
+}
+.home-logo{margin-bottom:12px;animation:fadeUp .5s ease both;}
+.home-tagline{
+  font-size:.7rem;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:28px;
+  animation:fadeUp .4s .06s ease both;
+}
+.home-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,rgba(143,195,46,.08),rgba(136,156,231,.08));
+  border:1px solid rgba(143,195,46,.2);
+  border-radius:100px;
+  padding:6px 20px;
+  font-family:'DM Mono',monospace;
+  font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--brand1);
+  margin-bottom:22px;
+  animation:fadeUp .4s .08s ease both;
+}
+.home-h{
+  font-size:clamp(2.6rem,7vw,4.2rem);
+  font-weight:800;letter-spacing:-2px;line-height:1.03;
+  margin-bottom:14px;
+  animation:fadeUp .4s .1s ease both;
+}
+.home-h em{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;font-style:normal;
+}
+.home-sub{
+  color:var(--muted);font-size:.95rem;line-height:1.8;
+  max-width:460px;margin:0 auto 28px;
+  animation:fadeUp .4s .13s ease both;
+}
+
+/* Rules cards */
+.rules-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  max-width:540px;width:100%;margin:0 auto 28px;
+  animation:fadeUp .4s .15s ease both;
+}
+@media(max-width:520px){.rules-grid{grid-template-columns:1fr 1fr;}}
+.rule-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:14px 12px;text-align:center;
+}
+.rule-icon{font-size:1.4rem;margin-bottom:6px;}
+.rule-label{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.rule-val{font-weight:800;font-size:.9rem;color:var(--text);}
+
+.btn-start{
+  width:100%;max-width:360px;
+  padding:18px;
+  background:linear-gradient(135deg,var(--brand1),var(--brand2));
+  color:#000;border:none;border-radius:11px;
+  font-family:'Open Sans',sans-serif;font-size:1.05rem;font-weight:800;
+  letter-spacing:.3px;cursor:pointer;
+  transition:all .2s;
+  animation:fadeUp .4s .2s ease both;
+}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(143,195,46,.35);}
+.btn-start:active{transform:translateY(0);}
+
+.home-meta{
+  display:flex;justify-content:center;gap:20px;flex-wrap:wrap;
+  margin-top:22px;
+  animation:fadeUp .4s .24s ease both;
+}
+.meta-item{
+  display:flex;align-items:center;gap:7px;
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);
+}
+.meta-dot{width:5px;height:5px;border-radius:50%;}
+
+/* ── GAME HEADER ── */
+.game-hdr{
+  background:rgba(8,8,8,.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;gap:12px;
+  flex-shrink:0;
+}
+.hdr-left{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+.lives-display{display:flex;align-items:center;gap:6px;}
+.life-icon{font-size:1.3rem;transition:all .3s;display:inline-block;}
+.life-icon.lost{opacity:.4;transform:scale(.8);filter:grayscale(1);}
+@keyframes lifeLost{0%{transform:scale(1.6)}40%{transform:scale(.65)}100%{transform:scale(.8)}}
+.life-icon.losing{animation:lifeLost .35s ease forwards;}
+
+/* Level progress bar */
+.level-prog{display:flex;align-items:center;gap:5px;flex:1;margin:0 14px;min-width:0;}
+.lp-step{
+  flex:1;height:4px;background:var(--border);border-radius:2px;
+  transition:background .4s;
+}
+.lp-step.done{background:var(--brand1);}
+.lp-step.current{background:linear-gradient(90deg,var(--brand1),var(--brand2));}
+
+.hdr-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.score-pill{
+  font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;
+  color:var(--brand2);
+  display:flex;align-items:center;gap:5px;
+}
+.score-val{font-size:1.1rem;font-weight:500;color:var(--brand1);transition:all .3s;}
+
+/* Pass button in header */
+.btn-pass-hdr{
+  font-family:'DM Mono',monospace;font-size:.68rem;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  padding:5px 12px;
+  background:rgba(136,156,231,.1);border:1px solid rgba(136,156,231,.3);
+  border-radius:100px;color:var(--brand2);cursor:pointer;
+  transition:all .2s;
+}
+.btn-pass-hdr:hover:not(:disabled){
+  background:rgba(136,156,231,.2);
+  box-shadow:0 0 16px rgba(136,156,231,.3);
+}
+.btn-pass-hdr:disabled{opacity:.3;cursor:not-allowed;}
+
+/* Timer ring */
+.timer-outer{display:flex;flex-direction:column;align-items:center;gap:1px;flex-shrink:0;}
+.timer-label-txt{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+.timer-wrap{position:relative;width:52px;height:52px;}
+.timer-wrap svg{transform:rotate(-90deg);}
+.timer-bg{fill:none;stroke:var(--border);stroke-width:4;}
+.t-ring{
+  fill:none;stroke:var(--brand1);stroke-width:4;
+  stroke-dasharray:138;stroke-dashoffset:0;
+  stroke-linecap:round;
+  transition:stroke-dashoffset 1s linear,stroke .4s;
+}
+.t-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.t-num{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;line-height:1;}
+.timer-urgent .t-ring{stroke:var(--red);}
+.timer-urgent .t-num{color:var(--red);}
+.timer-urgent{animation:timerpulse 1s ease infinite;}
+@keyframes timerpulse{0%,100%{opacity:1}50%{opacity:.65}}
+
+@media(max-width:580px){
+  .game-hdr{padding:8px 12px;}
+  .level-prog{margin:0 8px;}
+  .timer-wrap{width:44px;height:44px;}
+  .t-num{font-size:12px;}
+}
+
+/* ── GAME BODY ── */
+#s-game{min-height:100vh;}
+.game-body{max-width:640px;margin:0 auto;padding:32px 24px 80px;}
+@media(max-width:580px){.game-body{padding:22px 16px 80px;}}
+
+/* Level badge */
+.level-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 16px 5px 10px;
+  border-radius:100px;border:1px solid;
+  font-family:'DM Mono',monospace;font-size:.72rem;
+  letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.lb-pct{font-size:1.1rem;font-weight:700;}
+.lb-easy{background:rgba(143,195,46,.08);border-color:rgba(143,195,46,.25);color:var(--brand1);}
+.lb-med{background:rgba(136,156,231,.08);border-color:rgba(136,156,231,.25);color:var(--brand2);}
+.lb-hard{background:rgba(255,77,109,.08);border-color:rgba(255,77,109,.25);color:var(--red);}
+.lb-1pct{background:rgba(255,214,10,.08);border-color:rgba(255,214,10,.35);color:var(--gold);}
+
+.category-tag{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+}
+.q-text{
+  font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;
+  line-height:1.35;letter-spacing:-.4px;
+  margin-bottom:28px;
+}
+
+/* Answer buttons */
+.answers{display:flex;flex-direction:column;gap:10px;}
+.ans-btn{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:12px;padding:16px 18px;
+  text-align:left;cursor:pointer;
+  transition:all .18s;
+  color:var(--text);
+  font-family:'Open Sans',sans-serif;font-size:.92rem;line-height:1.5;
+  display:flex;align-items:center;gap:12px;
+  width:100%;
+}
+.ans-btn:hover:not(:disabled){
+  border-color:var(--brand2);
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(136,156,231,.12);
+}
+.ans-btn:disabled{cursor:default;}
+.ans-btn.correct{
+  border-color:var(--brand1);
+  background:rgba(143,195,46,.1);
+}
+.ans-btn.wrong{
+  border-color:var(--red);
+  background:rgba(255,77,109,.08);
+}
+.ans-key{
+  font-family:'DM Mono',monospace;font-size:.7rem;font-weight:600;
+  width:26px;height:26px;border-radius:6px;
+  background:var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .18s;
+}
+.ans-btn.correct .ans-key{background:var(--brand1);color:#000;}
+.ans-btn.wrong .ans-key{background:var(--red);color:#fff;}
+
+/* Feedback bar */
+.feedback-bar{
+  margin-top:18px;
+  padding:14px 18px;border-radius:10px;
+  font-size:.9rem;font-weight:700;line-height:1.5;
+  opacity:0;transition:opacity .3s;
+}
+.feedback-bar.show{opacity:1;}
+.feedback-bar.correct{background:rgba(143,195,46,.1);border:1px solid rgba(143,195,46,.3);color:var(--brand1);}
+.feedback-bar.wrong{background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.3);color:var(--red);}
+.feedback-bar.timeout{background:rgba(255,149,0,.08);border:1px solid rgba(255,149,0,.3);color:var(--orange);}
+
+/* Next button */
+.btn-next{
+  width:100%;margin-top:14px;
+  padding:15px;
+  background:linear-gradient(135deg,var(--brand1),var(--brand2));
+  color:#000;border:none;border-radius:10px;
+  font-family:'Open Sans',sans-serif;font-size:.95rem;font-weight:800;
+  cursor:pointer;transition:all .2s;
+  display:none;
+}
+.btn-next.show{display:block;}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(143,195,46,.3);}
+
+/* Streak banner */
+.streak-banner{
+  position:fixed;top:90px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,rgba(143,195,46,.9),rgba(136,156,231,.9));
+  color:#000;padding:8px 22px;border-radius:100px;
+  font-weight:800;font-size:.85rem;letter-spacing:.3px;
+  z-index:200;
+  opacity:0;transition:opacity .3s;
+  pointer-events:none;white-space:nowrap;
+}
+.streak-banner.show{opacity:1;}
+
+/* Bonus popup */
+.bonus-pop{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);
+  background:var(--card);border:1px solid var(--brand1);
+  border-radius:16px;padding:20px 32px;text-align:center;
+  z-index:300;opacity:0;pointer-events:none;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.bonus-pop.show{opacity:1;transform:translate(-50%,-50%) scale(1);}
+.bonus-num{font-size:2.5rem;font-weight:800;color:var(--brand1);}
+.bonus-label{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+
+/* ── GAME OVER SCREEN ── */
+#s-over{
+  min-height:100vh;
+  align-items:center;justify-content:center;
+  text-align:center;padding:48px 24px;
+}
+.over-icon{font-size:4rem;margin-bottom:14px;animation:popIn .5s ease both;}
+.over-h{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-1.5px;margin-bottom:8px;animation:fadeUp .4s .1s ease both;}
+.over-sub{font-size:.9rem;color:var(--muted);margin-bottom:28px;animation:fadeUp .4s .15s ease both;line-height:1.7;}
+.results-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:24px;max-width:400px;width:100%;
+  margin:0 auto 28px;
+  animation:fadeUp .4s .2s ease both;
+}
+.rc-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.rc-row:last-child{border-bottom:none;}
+.rc-label{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+.rc-value{font-weight:800;font-size:1rem;}
+.rc-value.big{font-size:1.6rem;color:var(--brand1);}
+
+.compare-msg{
+  font-size:.85rem;color:var(--muted);
+  margin-bottom:22px;line-height:1.7;
+  max-width:400px;
+  animation:fadeUp .4s .25s ease both;
+}
+.compare-msg strong{color:var(--text);}
+.btn-replay{
+  width:100%;max-width:360px;
+  padding:17px;
+  background:linear-gradient(135deg,var(--brand1),var(--brand2));
+  color:#000;border:none;border-radius:11px;
+  font-family:'Open Sans',sans-serif;font-size:1rem;font-weight:800;
+  cursor:pointer;transition:all .2s;
+  animation:fadeUp .4s .3s ease both;
+}
+.btn-replay:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(143,195,46,.35);}
+
+/* ── WIN SCREEN ── */
+#s-win{
+  min-height:100vh;
+  align-items:center;justify-content:center;
+  text-align:center;padding:48px 24px;
+  background:radial-gradient(ellipse at center,rgba(143,195,46,.06) 0%,transparent 70%);
+}
+.win-icon{font-size:5rem;margin-bottom:12px;animation:popIn .5s ease both;}
+.win-h{
+  font-size:clamp(2.2rem,5.5vw,3.4rem);font-weight:800;letter-spacing:-1.8px;
+  margin-bottom:10px;
+  animation:fadeUp .4s .1s ease both;
+}
+.win-h em{
+  background:linear-gradient(90deg,var(--gold),var(--brand1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;font-style:normal;
+}
+.win-sub{font-size:.95rem;color:var(--muted);line-height:1.8;max-width:420px;margin:0 auto 28px;animation:fadeUp .4s .15s ease both;}
+.confetti-bar{
+  display:flex;justify-content:center;gap:4px;
+  margin-bottom:24px;animation:fadeUp .4s .2s ease both;
+}
+.confetti-dot{
+  width:8px;height:8px;border-radius:50%;
+  animation:confettiPop .6s ease both;
+}
+@keyframes confettiPop{from{transform:scale(0)}to{transform:scale(1)}}
+
+/* ── FOOTER ── */
+.footer{
+  text-align:center;padding:20px 24px 28px;
+  font-size:.73rem;color:var(--muted);
+  border-top:1px solid var(--border);margin-top:auto;
+  line-height:1.9;
+  position:relative;z-index:1;
+}
+.footer a{color:var(--brand2);text-decoration:none;font-weight:600;}
+.footer a:hover{color:var(--brand1);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes scoreFlash{0%,100%{color:var(--brand1)}50%{color:var(--gold)}}
+.score-flash{animation:scoreFlash .4s ease;}
+
+/* Slide-in for questions */
+.q-enter{animation:qEnter .35s ease both;}
+@keyframes qEnter{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+/* Shake on wrong */
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .3s ease;}
+
+/* Mobile adjustments */
+@media(max-width:480px){
+  .rules-grid{grid-template-columns:repeat(3,1fr);}
+  .rule-card{padding:10px 8px;}
+  .rule-icon{font-size:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<section id="s-home" class="screen on">
+  <div class="home-logo">
+    <div class="dx-logo dx-logo-lg" style="flex-direction:column;align-items:center;gap:10px;">
+      <div class="dx-logo-badge" style="width:54px;height:54px;border-radius:12px;">
+        <svg viewBox="0 0 18 18" fill="none"><text x="1" y="14" font-family="'Open Sans',sans-serif" font-weight="800" font-size="13" fill="#000">dx</text></svg>
+      </div>
+      <div class="dx-logo-stack" style="text-align:center;">
+        <span class="dx-logo-text" style="font-size:1rem;">Digital<span>Xperience</span>.ai</span>
+        <span class="dx-logo-sub" style="text-align:center;">Strategy Lab</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-badge">
+    <span>🏆</span> Exclusive Club — Digital Marketing Edition
+  </div>
+
+  <h1 class="home-h">Can you reach the<br><em>1% Club?</em></h1>
+
+  <p class="home-sub">
+    10 questions. 10 levels. Only the sharpest digital marketers make it to the end.
+    Do you have what it takes?
+  </p>
+
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-icon">❤️</div>
+      <div class="rule-label">Lives</div>
+      <div class="rule-val">2 Lives</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon">🎟️</div>
+      <div class="rule-label">Pass</div>
+      <div class="rule-val">1 Pass</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon">⏱️</div>
+      <div class="rule-label">Timer</div>
+      <div class="rule-val">45 sec</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon">🔢</div>
+      <div class="rule-label">Levels</div>
+      <div class="rule-val">90% → 1%</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon">🔥</div>
+      <div class="rule-label">Streak</div>
+      <div class="rule-val">Bonus pts</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-icon">⚡</div>
+      <div class="rule-label">Speed</div>
+      <div class="rule-val">+10 pts</div>
+    </div>
+  </div>
+
+  <button class="btn-start" onclick="startGame()">🚀 Enter the Club</button>
+  <p style="font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:10px;animation:fadeUp .4s .22s ease both;">Digital Marketing Game &nbsp;·&nbsp; 10 Levels</p>
+
+
+
+  <footer class="footer" style="margin-top:32px;">
+    © 2026 <a href="https://digitalxperience.ai" target="_blank">DigitalXperience.ai</a> — All rights reserved. Unauthorised copying or reproduction prohibited.
+  </footer>
+</section>
+
+<!-- ═══════════════ GAME ═══════════════ -->
+<section id="s-game" class="screen">
+
+  <!-- Sticky header -->
+  <div class="game-hdr">
+    <div class="hdr-left">
+      <div class="lives-display" id="livesDisplay">
+        <span class="life-icon" id="life1">❤️</span>
+        <span class="life-icon" id="life2">❤️</span>
+      </div>
+      <button class="btn-pass-hdr" id="btnPass" onclick="usePass()">🎟️ PASS</button>
+    </div>
+
+    <div class="level-prog" id="levelProg">
+      <!-- 10 step dots filled by JS -->
+    </div>
+
+    <div class="hdr-right">
+      <div class="score-pill">
+        <span>PTS</span>
+        <span class="score-val" id="scoreVal">0</span>
+      </div>
+      <div class="timer-outer">
+        <div class="timer-wrap" id="timerWrap">
+          <svg viewBox="0 0 52 52" width="52" height="52">
+            <circle class="timer-bg" cx="26" cy="26" r="22"/>
+            <circle class="t-ring" id="tRing" cx="26" cy="26" r="22"/>
+          </svg>
+          <div class="t-inner"><span class="t-num" id="tNum">45</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Question area -->
+  <div class="game-body" id="questionArea">
+    <!-- Populated by JS -->
+  </div>
+
+  <!-- Streak banner -->
+  <div class="streak-banner" id="streakBanner"></div>
+  <!-- Bonus popup -->
+  <div class="bonus-pop" id="bonusPop">
+    <div class="bonus-num" id="bonusNum">+10</div>
+    <div class="bonus-label" id="bonusLabel">Time Bonus</div>
+  </div>
+</section>
+
+<!-- ═══════════════ GAME OVER ═══════════════ -->
+<section id="s-over" class="screen">
+  <div class="over-icon">💔</div>
+  <h2 class="over-h">Game Over</h2>
+  <p class="over-sub" id="overSub">You ran out of lives. Better luck next time!</p>
+
+  <div class="results-card">
+    <div class="rc-row">
+      <span class="rc-label">Last Completed</span>
+      <span class="rc-value" id="overLevel">—</span>
+    </div>
+    <div class="rc-row">
+      <span class="rc-label">Questions Correct</span>
+      <span class="rc-value" id="overCorrect">—</span>
+    </div>
+    <div class="rc-row">
+      <span class="rc-label">Final Score</span>
+      <span class="rc-value big" id="overScore">0</span>
+    </div>
+  </div>
+
+  <p class="compare-msg" id="compareMsg"></p>
+
+  <button class="btn-replay" onclick="restartGame()">🔁 Play Again</button>
+
+  <footer class="footer">
+    © 2026 <a href="https://digitalxperience.ai" target="_blank">DigitalXperience.ai</a> — All rights reserved. Unauthorised copying or reproduction prohibited.
+  </footer>
+</section>
+
+<!-- ═══════════════ WIN ═══════════════ -->
+<section id="s-win" class="screen">
+  <div class="win-icon">🏆</div>
+  <h2 class="win-h">You are in the<br><em>1% Club!</em></h2>
+  <p class="win-sub">
+    Only 1% of players make it this far. You've demonstrated genuine mastery of digital marketing — congratulations!
+  </p>
+
+  <div class="confetti-bar" id="confettiBtns"></div>
+
+  <div class="results-card">
+    <div class="rc-row">
+      <span class="rc-label">Levels Completed</span>
+      <span class="rc-value">10 / 10 ✅</span>
+    </div>
+    <div class="rc-row">
+      <span class="rc-label">Questions Correct</span>
+      <span class="rc-value" id="winCorrect">—</span>
+    </div>
+    <div class="rc-row">
+      <span class="rc-label">Final Score</span>
+      <span class="rc-value big" id="winScore">0</span>
+    </div>
+  </div>
+
+  <p class="compare-msg">🎓 Share your result and challenge your classmates!</p>
+
+  <button class="btn-replay" onclick="restartGame()">🔁 Play Again</button>
+
+  <footer class="footer">
+    © 2026 <a href="https://digitalxperience.ai" target="_blank">DigitalXperience.ai</a> — All rights reserved. Unauthorised copying or reproduction prohibited.
+  </footer>
+</section>
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+/* ─────────────────────────────────────────
+   QUESTION BANK
+   Each level: array of 3 questions.
+   correct: index into options[] (0-based)
+───────────────────────────────────────── */
+const QUESTION_BANK = {
+  '90': {
+    label: '90%', category: 'Digital Marketing Basics', pts: 10,
+    difficulty: 'easy',
+    questions: [
+      {
+        q: 'A company runs campaigns across social media but never changes them. Performance stays flat. What is the most likely issue?',
+        options: ['Budget is too low', 'No use of data to optimise decisions', 'Too many platforms'],
+        correct: 1
+      },
+      {
+        q: 'Two campaigns get the same number of views. Only one improves over time. Why?',
+        options: ['It uses more images', 'It uses performance data to optimise', 'It targets more people'],
+        correct: 1
+      },
+      {
+        q: 'A brand increases posting frequency but engagement drops. What is the most likely reason?',
+        options: ['Posting more always reduces reach', 'Content is not aligned with audience needs', 'Algorithms penalise daily posting'],
+        correct: 1
+      }
+    ]
+  },
+  '80': {
+    label: '80%', category: 'Objectives (SOSTAC)', pts: 20,
+    difficulty: 'easy',
+    questions: [
+      {
+        q: 'A campaign runs for 3 months, but success cannot be evaluated. Why?',
+        options: ['Budget too low', 'Objectives were not clearly measurable', 'Channels were wrong'],
+        correct: 1
+      },
+      {
+        q: 'Which objective is weakest for decision-making?',
+        options: ['Increase revenue by 15% in 12 months', 'Improve customer engagement', 'Reduce bounce rate by 10%'],
+        correct: 1
+      },
+      {
+        q: 'Which is a SMART objective?',
+        options: ['Get 10% more followers', 'Increase traffic by 20% in 3 months', 'Improve brand engagement by 10%'],
+        correct: 1
+      }
+    ]
+  },
+  '70': {
+    label: '70%', category: 'Segmentation & Strategy', pts: 30,
+    difficulty: 'easy',
+    questions: [
+      {
+        q: 'A campaign targets a broad audience but performs poorly. What is the main issue?',
+        options: ['Too many channels', 'Message lacks relevance across segments', 'Budget is too high'],
+        correct: 1
+      },
+      {
+        q: 'Which is the main strategic risk of targeting a mass audience?',
+        options: ['Reduced data collection', 'Diluted value proposition across segments', 'Increased ad spend'],
+        correct: 1
+      },
+      {
+        q: 'A niche segment generates fewer clicks but higher conversions. What should you do?',
+        options: ['Ignore it due to low volume', 'Prioritise it due to higher efficiency', 'Replace it with broader targeting'],
+        correct: 1
+      }
+    ]
+  },
+  '60': {
+    label: '60%', category: 'SEO', pts: 40,
+    difficulty: 'med',
+    questions: [
+      {
+        q: 'Two websites have similar content, but one ranks higher consistently. Why?',
+        options: ['More backlinks increasing authority', 'More images', 'Longer paragraphs'],
+        correct: 0
+      },
+      {
+        q: 'A page ranks highly but has a very low click-through rate. What is the issue?',
+        options: ['Weak title/description reducing appeal', 'Too many backlinks', 'Too much content'],
+        correct: 0
+      },
+      {
+        q: 'A keyword has high traffic but low conversions. Why?',
+        options: ['Too many backlinks', 'Weak search intent alignment', 'Too much competition'],
+        correct: 1
+      }
+    ]
+  },
+  '50': {
+    label: '50%', category: 'Google Ads', pts: 50,
+    difficulty: 'med',
+    questions: [
+      {
+        q: '£300 spend generates 150 clicks and 3 sales. What is the main issue?',
+        options: ['CPC is too high', 'Conversion rate is low', 'Too much traffic'],
+        correct: 1
+      },
+      {
+        q: 'A company pauses Google Ads but traffic remains stable. Why?',
+        options: ['Ads are still running', 'Organic channels are driving traffic', 'Traffic is unaffected by ads'],
+        correct: 1
+      },
+      {
+        q: 'Campaign A: high clicks, low sales. Campaign B: lower clicks, higher sales. Which is better?',
+        options: ['Campaign A', 'Campaign B', 'Both equal'],
+        correct: 1
+      }
+    ]
+  },
+  '40': {
+    label: '40%', category: 'Mobile & Social', pts: 60,
+    difficulty: 'med',
+    questions: [
+      {
+        q: 'Users leave a page within 3 seconds. What is most likely wrong?',
+        options: ['Too many backlinks', 'Slow load or unclear content immediately visible', 'Too many ads'],
+        correct: 1
+      },
+      {
+        q: 'A social post is informative but gets ignored. Why?',
+        options: ['Too much data', 'It fails to capture attention instantly on mobile', 'It lacks hashtags'],
+        correct: 1
+      },
+      {
+        q: 'Why is mobile behaviour difficult for marketers?',
+        options: ['Users browse less', 'Attention is fragmented into short bursts', 'Devices are slower'],
+        correct: 1
+      }
+    ]
+  },
+  '30': {
+    label: '30%', category: 'Email Marketing', pts: 70,
+    difficulty: 'hard',
+    questions: [
+      {
+        q: 'High open rate, low click rate. What is the issue?',
+        options: ['Weak subject line', 'Weak content or CTA', 'Poor segmentation'],
+        correct: 1
+      },
+      {
+        q: 'An email campaign performs poorly despite strong content. Why?',
+        options: ['Sent to the wrong audience segment', 'Too many images', 'Too short'],
+        correct: 0
+      },
+      {
+        q: 'A company sends the same email to all users. What is the risk?',
+        options: ['Higher open rates', 'Lower relevance and engagement', 'Lower costs'],
+        correct: 1
+      }
+    ]
+  },
+  '20': {
+    label: '20%', category: 'Content Marketing', pts: 80,
+    difficulty: 'hard',
+    questions: [
+      {
+        q: 'Content gets high traffic but no conversions. Why?',
+        options: ['Not enough content', 'No clear path to action', 'Too many keywords'],
+        correct: 1
+      },
+      {
+        q: 'A company produces frequent content but sees no growth. Why?',
+        options: ['Not enough posts', 'Lack of strategic alignment with goals', 'Too many visuals'],
+        correct: 1
+      },
+      {
+        q: 'Which content is most valuable?',
+        options: ['Content that attracts attention only', 'Content that drives measurable action', 'Content that is shared widely'],
+        correct: 1
+      }
+    ]
+  },
+  '10': {
+    label: '10%', category: 'Analytics', pts: 90,
+    difficulty: 'hard',
+    canPass: false,
+    questions: [
+      {
+        q: 'Traffic increases by 50%, but revenue stays the same. Why?',
+        options: ['Conversion rate has decreased', 'Traffic quality improved', 'Costs increased'],
+        correct: 0
+      },
+      {
+        q: 'A campaign has fewer visitors but higher revenue. Why?',
+        options: ['Higher conversion rate or better targeting', 'Lower traffic cost', 'More impressions'],
+        correct: 0
+      },
+      {
+        q: 'Two campaigns have equal traffic. One generates more revenue. Why?',
+        options: ['Better conversion rate', 'More impressions', 'Lower cost per click'],
+        correct: 0
+      }
+    ]
+  },
+  '1': {
+    label: '1%', category: 'Advanced Strategy', pts: 100,
+    difficulty: '1pct',
+    canPass: false,
+    questions: [
+      {
+        q: 'A campaign doubles its traffic but its conversion rate halves. What happens to total sales?',
+        options: ['Increase', 'Decrease', 'Stay the same'],
+        correct: 2
+      },
+      {
+        q: 'Campaign A: 100 visitors → 10 sales. Campaign B: 1,000 visitors → 50 sales. Which performs better?',
+        options: ['Campaign A', 'Campaign B', 'Depends on the objective'],
+        correct: 2
+      },
+      {
+        q: 'You improve conversion rate, but traffic drops significantly. What determines whether performance improved?',
+        options: ['Conversion rate', 'Traffic', 'Overall revenue outcome'],
+        correct: 2
+      }
+    ]
+  }
+};
+
+const LEVEL_ORDER = ['90','80','70','60','50','40','30','20','10','1'];
+const TIMER_TOTAL = 45;
+const CIRCUMFERENCE = 2 * Math.PI * 22; // ~138.2
+
+/* ── STATE ── */
+let state = {};
+
+function initState() {
+  state = {
+    levelIdx: 0,
+    lives: 2,
+    hasPass: true,
+    score: 0,
+    streak: 0,
+    correctCount: 0,
+    answered: false,
+    lastAnswerCorrect: false,
+    timerVal: TIMER_TOTAL,
+    timerInterval: null,
+    currentQuestion: null,
+    currentOptions: [],
+  };
+}
+
+/* ── SCREEN HELPER ── */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+}
+
+/* ── START ── */
+function startGame() {
+  initState();
+  showScreen('s-game');
+  // Reset hearts immediately (in case of replay)
+  ['life1','life2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.className = 'life-icon'; el.textContent = '❤️'; }
+  });
+  buildLevelProg();
+  renderQuestion();
+}
+
+function restartGame() {
+  startGame();
+}
+
+/* ── LEVEL PROGRESS BAR ── */
+function buildLevelProg() {
+  const prog = document.getElementById('levelProg');
+  prog.innerHTML = '';
+  LEVEL_ORDER.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'lp-step';
+    d.id = `lpStep${i}`;
+    prog.appendChild(d);
+  });
+  updateLevelProg();
+}
+
+function updateLevelProg() {
+  LEVEL_ORDER.forEach((_, i) => {
+    const el = document.getElementById(`lpStep${i}`);
+    if (!el) return;
+    el.classList.remove('done','current');
+    if (i < state.levelIdx) el.classList.add('done');
+    else if (i === state.levelIdx) el.classList.add('current');
+  });
+}
+
+/* ── RENDER QUESTION ── */
+function renderQuestion() {
+  clearTimer();
+  state.answered = false;
+  updateLevelProg();
+  updateLivesDisplay();
+  updatePassBtn();
+
+  const levelKey = LEVEL_ORDER[state.levelIdx];
+  const levelData = QUESTION_BANK[levelKey];
+  
+  // Pick random question from pool
+  const pool = levelData.questions;
+  const picked = pool[Math.floor(Math.random() * pool.length)];
+  state.currentQuestion = picked;
+
+  // Shuffle options, keeping track of correct
+  const indices = [0,1,2];
+  shuffle(indices);
+  state.currentOptions = indices.map((origIdx, newIdx) => ({
+    text: picked.options[origIdx],
+    isCorrect: origIdx === picked.correct,
+    newIdx
+  }));
+
+  // Difficulty class for level badge
+  const diffClass = {easy:'lb-easy',med:'lb-med',hard:'lb-hard','1pct':'lb-1pct'}[levelData.difficulty] || 'lb-med';
+
+  const area = document.getElementById('questionArea');
+  area.innerHTML = `
+    <div class="q-enter">
+      <div class="level-badge ${diffClass}">
+        <span class="lb-pct">${levelData.label}</span>
+        <span>Level</span>
+      </div>
+      <div class="category-tag">${levelData.category} · ${levelData.pts} pts</div>
+      <div class="q-text">${picked.q}</div>
+      <div class="answers" id="answersDiv">
+        ${state.currentOptions.map((opt, i) => `
+          <button class="ans-btn" id="ans${i}" onclick="selectAnswer(${i})">
+            <span class="ans-key">${String.fromCharCode(65+i)}</span>
+            <span>${opt.text}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="feedback-bar" id="feedbackBar"></div>
+      <button class="btn-next" id="btnNext">
+        ${state.levelIdx === LEVEL_ORDER.length - 1 ? '🏆 Claim Your Crown' : 'Next Level →'}
+      </button>
+    </div>
+  `;
+
+  startTimer(levelKey);
+}
+
+/* ── SHUFFLE HELPER ── */
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* ── TIMER ── */
+function startTimer(levelKey) {
+  state.timerVal = TIMER_TOTAL;
+  updateTimerUI(TIMER_TOTAL);
+  document.getElementById('timerWrap').classList.remove('timer-urgent');
+
+  state.timerInterval = setInterval(() => {
+    state.timerVal--;
+    updateTimerUI(state.timerVal);
+    if (state.timerVal <= 10) {
+      document.getElementById('timerWrap').classList.add('timer-urgent');
+    }
+    if (state.timerVal <= 0) {
+      clearTimer();
+      handleTimeout();
+    }
+  }, 1000);
+}
+
+function clearTimer() {
+  if (state.timerInterval) {
+    clearInterval(state.timerInterval);
+    state.timerInterval = null;
+  }
+}
+
+function updateTimerUI(val) {
+  document.getElementById('tNum').textContent = val;
+  const ring = document.getElementById('tRing');
+  const offset = CIRCUMFERENCE * (1 - val / TIMER_TOTAL);
+  ring.style.strokeDashoffset = offset;
+}
+
+function handleTimeout() {
+  if (state.answered) return;
+  state.answered = true;
+  disableAnswers();
+
+  const levelKey = LEVEL_ORDER[state.levelIdx];
+  const levelData = QUESTION_BANK[levelKey];
+  const passAllowed = levelData.canPass !== false;
+
+  // Auto-use pass if available, allowed on this level, and player still has lives
+  if (state.hasPass && passAllowed && state.lives > 0) {
+    state.hasPass = false;
+    state.streak = 0; // timeout breaks streak even with auto-pass
+    updatePassBtn();
+    const btn = document.getElementById('btnNext');
+    if (btn) {
+      btn.classList.add('show');
+      btn.textContent = state.levelIdx === LEVEL_ORDER.length - 1 ? '🏆 Claim Your Crown' : 'Next Level →';
+      btn.onclick = () => nextQuestion();
+    }
+    showFeedback('timeout', '⏰ Time\'s up! Your Pass was automatically used — no life lost. Moving on.');
+    return;
+  }
+
+  // No pass available — lose a life
+  // Highlight correct answer
+  state.currentOptions.forEach((opt, i) => {
+    if (opt.isCorrect) document.getElementById(`ans${i}`).classList.add('correct');
+  });
+
+  state.streak = 0;
+  state.lastAnswerCorrect = false;
+  loseLife();
+
+  const isLastLevel = levelKey === '1';
+  const isGameOver = state.lives < 0 || isLastLevel;
+  if (isGameOver) {
+    showFeedback('timeout', '⏰ Time\'s up! Game Over.');
+    const btn2 = document.getElementById('btnNext');
+    if (btn2) btn2.textContent = '💔 See Results';
+  } else if (state.lives === 0) {
+    showFeedback('timeout', `⏰ Time\'s up! You lost a life. No lives remaining — one more wrong and it's Game Over.`);
+  } else {
+    showFeedback('timeout', `⏰ Time\'s up! You lost a life. ${state.lives} ${state.lives === 1 ? 'life' : 'lives'} remaining.`);
+  }
+}
+
+/* ── SELECT ANSWER ── */
+function selectAnswer(idx) {
+  if (state.answered) return;
+  clearTimer();
+  state.answered = true;
+  disableAnswers();
+
+  const opt = state.currentOptions[idx];
+  const timeBonus = calcTimeBonus(state.timerVal);
+
+  if (opt.isCorrect) {
+    document.getElementById(`ans${idx}`).classList.add('correct');
+    state.correctCount++;
+    state.streak++;
+    state.lastAnswerCorrect = true;
+
+    const levelKey = LEVEL_ORDER[state.levelIdx];
+    let pts = QUESTION_BANK[levelKey].pts + timeBonus;
+    let msg = `✅ Correct! +${QUESTION_BANK[levelKey].pts} pts`;
+
+    if (timeBonus > 0) {
+      msg += ` +${timeBonus} speed bonus`;
+      showBonusPopup(`+${timeBonus}`, 'Speed Bonus');
+    }
+
+    // Streak bonuses
+    if (state.streak === 5) {
+      pts += 25;
+      msg += ' · 🔥🔥 5-streak +25!';
+      showStreakBanner('🔥🔥 5-STREAK BONUS! +25 PTS');
+    } else if (state.streak === 3) {
+      pts += 10;
+      msg += ' · 🔥 3-streak +10!';
+      showStreakBanner('🔥 3-STREAK BONUS! +10 PTS');
+    } else if (state.streak > 5 && state.streak % 2 === 0) {
+      pts += 15;
+      msg += ` · 🔥 ${state.streak}-streak +15!`;
+      showStreakBanner(`🔥 ${state.streak}-STREAK BONUS! +15 PTS`);
+    }
+
+    state.score += pts;
+    updateScore();
+    showFeedback('correct', msg);
+  } else {
+    document.getElementById(`ans${idx}`).classList.add('wrong');
+    state.lastAnswerCorrect = false;
+    state.currentOptions.forEach((o, i) => {
+      if (o.isCorrect) document.getElementById(`ans${i}`).classList.add('correct');
+    });
+    state.streak = 0;
+    document.getElementById('answersDiv').classList.add('shake');
+    loseLife();
+    const levelKey2 = LEVEL_ORDER[state.levelIdx];
+    const isLastLevel2 = levelKey2 === '1';
+    const isGameOver = state.lives < 0 || isLastLevel2;
+    if (isGameOver) {
+      showFeedback('wrong', `❌ Not quite! The correct answer is highlighted. Game Over.`);
+      const btn = document.getElementById('btnNext');
+      if (btn) btn.textContent = '💔 See Results';
+    } else if (state.lives === 0) {
+      showFeedback('wrong', `❌ Not quite! The correct answer is highlighted. No lives remaining — one more wrong and it's Game Over.`);
+    } else {
+      showFeedback('wrong', `❌ Not quite! The correct answer is highlighted. ${state.lives} ${state.lives === 1 ? 'life' : 'lives'} remaining.`);
+    }
+  }
+}
+
+function calcTimeBonus(timeLeft) {
+  if (timeLeft > 35) return 10; // answered < 10s
+  if (timeLeft > 25) return 5;  // answered < 20s
+  return 0;
+}
+
+function disableAnswers() {
+  document.querySelectorAll('.ans-btn').forEach(b => b.disabled = true);
+}
+
+/* ── FEEDBACK ── */
+function showFeedback(type, msg) {
+  const bar = document.getElementById('feedbackBar');
+  bar.className = `feedback-bar ${type} show`;
+  bar.textContent = msg;
+  const btn = document.getElementById('btnNext');
+  if (btn) {
+    btn.classList.add('show');
+    btn.onclick = () => nextQuestion();
+  }
+}
+
+/* ── SCORE ── */
+function updateScore() {
+  const el = document.getElementById('scoreVal');
+  el.textContent = state.score;
+  el.classList.remove('score-flash');
+  void el.offsetWidth;
+  el.classList.add('score-flash');
+}
+
+/* ── LIVES ── */
+function updateLivesDisplay() {
+  const l1 = document.getElementById('life1');
+  const l2 = document.getElementById('life2');
+  if (!l1 || !l2) return;
+
+  const was2Full = !l2.classList.contains('lost');
+  const now2Full = state.lives >= 2;
+  const was1Full = !l1.classList.contains('lost');
+  const now1Full = state.lives >= 1;
+
+  if (was2Full && !now2Full) {
+    l2.classList.add('losing');
+    setTimeout(() => {
+      l2.classList.remove('losing');
+      l2.classList.add('lost');
+      l2.textContent = '🖤';
+    }, 300);
+  } else if (!was2Full && now2Full) {
+    l2.classList.remove('lost', 'losing');
+    l2.textContent = '❤️';
+  }
+
+  if (was1Full && !now1Full) {
+    l1.classList.add('losing');
+    setTimeout(() => {
+      l1.classList.remove('losing');
+      l1.classList.add('lost');
+      l1.textContent = '🖤';
+    }, 300);
+  } else if (!was1Full && now1Full) {
+    l1.classList.remove('lost', 'losing');
+    l1.textContent = '❤️';
+  }
+}
+
+function loseLife() {
+  state.lives--;
+  updateLivesDisplay();
+}
+
+/* ── PASS ── */
+function updatePassBtn() {
+  const btn = document.getElementById('btnPass');
+  const levelKey = LEVEL_ORDER[state.levelIdx];
+  const levelData = QUESTION_BANK[levelKey];
+  const forbidden = levelData.canPass === false;
+  btn.disabled = !state.hasPass || forbidden;
+  btn.textContent = state.hasPass ? '🎟️ PASS' : '🎟️ Used';
+  if (forbidden && state.hasPass) btn.title = 'Pass not available at this level';
+}
+
+function usePass() {
+  if (!state.hasPass) return;
+  const levelKey = LEVEL_ORDER[state.levelIdx];
+  const levelData = QUESTION_BANK[levelKey];
+  if (levelData.canPass === false) return;
+
+  state.hasPass = false;
+  clearTimer();
+  state.answered = true;
+  disableAnswers();
+  showFeedback('timeout', '🎟️ Pass used! Moving to next level with no penalty.');
+  const btn = document.getElementById('btnNext');
+  if (btn) {
+    btn.classList.add('show');
+    btn.textContent = state.levelIdx === LEVEL_ORDER.length - 1 ? '🏆 Claim Your Crown' : 'Next Level →';
+    btn.onclick = () => nextQuestion();
+  }
+  updatePassBtn();
+  // Streak stays intact on pass
+}
+
+/* ── NEXT QUESTION ── */
+function nextQuestion() {
+  // 1% level: correct = win, wrong/timeout = instant game over
+  if (LEVEL_ORDER[state.levelIdx] === '1') {
+    if (state.lastAnswerCorrect) { triggerWin(); return; }
+    else { triggerGameOver(); return; }
+  }
+  // Lives below 0 = game over (lives=0 means last shield just gone, still alive but vulnerable)
+  if (state.lives < 0) {
+    triggerGameOver();
+    return;
+  }
+  // Advance to next level
+  state.levelIdx++;
+  renderQuestion();
+}
+
+/* ── GAME OVER ── */
+function triggerGameOver() {
+  clearTimer();
+  const failedKey = LEVEL_ORDER[Math.min(state.levelIdx, LEVEL_ORDER.length - 1)];
+  const failedLabel = QUESTION_BANK[failedKey].label;
+  const lastCompletedIdx = state.levelIdx - 1;
+
+  document.getElementById('overLevel').textContent = lastCompletedIdx >= 0
+    ? QUESTION_BANK[LEVEL_ORDER[lastCompletedIdx]].label + ' Level'
+    : 'None';
+  document.getElementById('overCorrect').textContent = state.correctCount + ' / ' + (state.levelIdx + 1);
+  document.getElementById('overScore').textContent = state.score;
+
+  document.getElementById('compareMsg').innerHTML = lastCompletedIdx >= 0
+    ? `Eliminated at the <strong>${failedLabel}</strong> level. Keep studying and come back stronger!`
+    : 'Don\'t give up — digital marketing mastery takes practice!';
+
+  showScreen('s-over');
+}
+
+/* ── WIN ── */
+function triggerWin() {
+  clearTimer();
+  document.getElementById('winCorrect').textContent = state.correctCount + ' / 10';
+  document.getElementById('winScore').textContent = state.score;
+
+  // Confetti dots
+  const colours = ['#8FC32E','#889CE7','#FFD60A','#FF9500','#FF4D6D','#fff'];
+  const bar = document.getElementById('confettiBtns');
+  bar.innerHTML = colours.concat(colours).map((c,i) =>
+    `<div class="confetti-dot" style="background:${c};animation-delay:${i*0.05}s;"></div>`
+  ).join('');
+
+  showScreen('s-win');
+}
+
+/* ── STREAK BANNER ── */
+let streakTO;
+function showStreakBanner(msg) {
+  const el = document.getElementById('streakBanner');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(streakTO);
+  streakTO = setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+/* ── BONUS POPUP ── */
+let bonusTO;
+function showBonusPopup(num, label) {
+  const pop = document.getElementById('bonusPop');
+  document.getElementById('bonusNum').textContent = num;
+  document.getElementById('bonusLabel').textContent = label;
+  pop.classList.add('show');
+  clearTimeout(bonusTO);
+  bonusTO = setTimeout(() => pop.classList.remove('show'), 1400);
+}
+</script>
+</body>
+</html>
