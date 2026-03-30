@@ -24,6 +24,103 @@
   --gold:    #FFD60A;
 }
 
+/* ── LIGHT MODE ── */
+body.light {
+  --bg:      #f0f2f5;
+  --surface: #e2e6ec;
+  --card:    #ffffff;
+  --border:  #c8cdd6;
+  --brand1:  #6a9a1f;
+  --brand2:  #5c6fc9;
+  --text:    #111827;
+  --muted:   #4b5563;
+  --red:     #dc2626;
+  --orange:  #d97706;
+  --gold:    #b45309;
+}
+
+/* Light mode structural reinforcement — prevents floaty look */
+body.light body::before{opacity:.4;}
+body.light .game-hdr{
+  background:rgba(225,229,235,.98);
+  border-bottom:2px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+body.light .rule-card{
+  border:1.5px solid var(--border);
+  box-shadow:0 1px 4px rgba(0,0,0,.07);
+}
+body.light .ans-btn{
+  border:1.5px solid var(--border);
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+}
+body.light .ans-btn:hover:not(:disabled){
+  border-color:var(--brand2);
+  box-shadow:0 3px 12px rgba(92,111,201,.15);
+}
+body.light .results-card{
+  border:1.5px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+body.light .feedback-bar.correct{background:rgba(106,154,31,.1);border:1.5px solid rgba(106,154,31,.4);color:#3d6b00;}
+body.light .feedback-bar.wrong{background:rgba(220,38,38,.07);border:1.5px solid rgba(220,38,38,.3);color:#b91c1c;}
+body.light .feedback-bar.timeout{background:rgba(217,119,6,.07);border:1.5px solid rgba(217,119,6,.3);color:#92400e;}
+body.light .btn-pass-hdr{
+  background:rgba(92,111,201,.1);
+  border:1.5px solid rgba(92,111,201,.35);
+}
+body.light .home-badge{
+  background:rgba(106,154,31,.08);
+  border:1.5px solid rgba(106,154,31,.25);
+}
+body.light .lp-step{background:#c0c6d0;}
+body.light .lp-step.done{background:var(--brand1);}
+body.light .lp-step.current{background:linear-gradient(90deg,var(--brand1),var(--brand2));}
+body.light body::before{
+  background-image:
+    linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);
+}
+
+/* ── MODE TOGGLE ── */
+.mode-toggle{
+  display:flex;align-items:center;gap:10px;
+  margin-top:20px;
+  animation:fadeUp .4s .22s ease both;
+}
+.mode-toggle-label{
+  font-family:'DM Mono',monospace;font-size:.7rem;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);
+}
+.toggle-switch{
+  position:relative;width:44px;height:24px;
+  cursor:pointer;flex-shrink:0;
+}
+.toggle-switch input{opacity:0;width:0;height:0;position:absolute;}
+.toggle-track{
+  position:absolute;inset:0;
+  background:var(--border);
+  border-radius:100px;
+  border:1.5px solid var(--border);
+  transition:all .25s;
+}
+.toggle-switch input:checked + .toggle-track{
+  background:var(--brand2);
+  border-color:var(--brand2);
+}
+.toggle-thumb{
+  position:absolute;top:3px;left:3px;
+  width:16px;height:16px;
+  background:#fff;border-radius:50%;
+  transition:transform .25s;
+  box-shadow:0 1px 4px rgba(0,0,0,.25);
+}
+.toggle-switch input:checked ~ .toggle-thumb{
+  transform:translateX(20px);
+}
+.toggle-icon{font-size:.9rem;}
+
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   background:var(--bg);
@@ -375,6 +472,7 @@ body::before{
   font-family:'Open Sans',sans-serif;font-size:1rem;font-weight:800;
   cursor:pointer;transition:all .2s;
   animation:fadeUp .4s .3s ease both;
+  margin-bottom:32px;
 }
 .btn-replay:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(143,195,46,.35);}
 
@@ -502,6 +600,17 @@ body::before{
 
   <button class="btn-start" onclick="startGame()">🚀 Enter the Club</button>
   <p style="font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:10px;animation:fadeUp .4s .22s ease both;">Digital Marketing Game &nbsp;·&nbsp; 10 Levels</p>
+
+  <div class="mode-toggle">
+    <span class="toggle-icon">🌙</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="modeToggle" onchange="toggleMode(this.checked)">
+      <div class="toggle-track"></div>
+      <div class="toggle-thumb"></div>
+    </label>
+    <span class="toggle-icon">☀️</span>
+    <span class="mode-toggle-label" id="modeLabel">Dark Mode</span>
+  </div>
 
 
 
@@ -1302,6 +1411,25 @@ function showBonusPopup(num, label) {
   clearTimeout(bonusTO);
   bonusTO = setTimeout(() => pop.classList.remove('show'), 1400);
 }
+
+/* ── LIGHT / DARK MODE ── */
+function toggleMode(isLight) {
+  document.body.classList.toggle('light', isLight);
+  document.getElementById('modeLabel').textContent = isLight ? 'Light Mode' : 'Dark Mode';
+  localStorage.setItem('dxTheme', isLight ? 'light' : 'dark');
+}
+
+// Apply saved theme on load (script is at bottom of body so DOM is ready)
+(function() {
+  const saved = localStorage.getItem('dxTheme');
+  if (saved === 'light') {
+    document.body.classList.add('light');
+    const t = document.getElementById('modeToggle');
+    if (t) t.checked = true;
+    const l = document.getElementById('modeLabel');
+    if (l) l.textContent = 'Light Mode';
+  }
+})();
 </script>
 </body>
 </html>
